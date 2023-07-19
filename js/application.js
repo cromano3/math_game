@@ -1,4 +1,13 @@
 var currentQuestion;
+var timer = 10;
+
+var interval = setInterval(function () {
+  timer--;
+  $('#countdown').text(timer);
+  if (timer === 0) {
+    clearInterval(interval);
+  }
+}, 1000);
 
 function createRandomNumber() {
   return Math.ceil(Math.random() * 10);
