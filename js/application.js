@@ -1,13 +1,25 @@
 var currentQuestion;
-var timer = 10;
+var timer = 9;
+var interval;
 
-var interval = setInterval(function () {
-  timer--;
-  $('#countdown').text(timer);
+function startGame(){
   if (timer === 0) {
-    clearInterval(interval);
+    timer = 9;
   }
-}, 1000);
+  interval = setInterval(function () {
+    timer--;
+    $('#countdown').text(timer);
+    if (timer === 0) {
+      clearInterval(interval);
+      interval = undefined;
+    }
+  }, 1000);
+}
+
+function addSecond(){
+  timer++;
+  $('#countdown').text(timer);
+}
 
 function createRandomNumber() {
   return Math.ceil(Math.random() * 10);
@@ -30,11 +42,15 @@ function checkAnswer(userInput, answer) {
   if(userInput === answer){
     createQuestion();
     $('#user-input').val('');
+    addSecond();
   }
 }
 
 function setInputListener(){
   $('#user-input').on('keyup', function () {
+    if (!interval) {
+      startGame();
+    }
     checkAnswer(Number($(this).val()), currentQuestion.answer);
   });
 }
