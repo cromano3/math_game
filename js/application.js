@@ -20,6 +20,7 @@ function createQuestion() {
 function checkAnswer(userInput, answer) {
   if(userInput === answer){
     createQuestion();
+    $('#user-input').val('');
   }
 }
 
