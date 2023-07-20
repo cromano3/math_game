@@ -2,16 +2,21 @@ var currentQuestion;
 var timer = 9;
 var interval;
 var score = 0;
+var highScore = 0;
 
 function startGame(){
   if (timer === 0) {
     timer = 9;
-    score = 0;
+    score = 0;  
   }
   interval = setInterval(function () {
     timer--;
     $('#countdown').text(timer);
     if (timer === 0) {
+      if(score > highScore){
+        highScore = score;
+        $('#high-score').text(highScore);     
+      }
       clearInterval(interval);
       interval = undefined;
     }
