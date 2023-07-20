@@ -1,10 +1,12 @@
 var currentQuestion;
 var timer = 9;
 var interval;
+var score = 0;
 
 function startGame(){
   if (timer === 0) {
     timer = 9;
+    score = 0;
   }
   interval = setInterval(function () {
     timer--;
@@ -15,6 +17,11 @@ function startGame(){
     }
   }, 1000);
 }
+
+function updateScore(amount) {
+  score += amount;
+  $('#score').text(score);
+};
 
 function addSecond(){
   timer++;
@@ -43,6 +50,7 @@ function checkAnswer(userInput, answer) {
     createQuestion();
     $('#user-input').val('');
     addSecond();
+    updateScore(1);
   }
 }
 
